@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom"
 import queryString from 'query-string';
 import Pagination from '../../components/Pagination'
 import Searchbar from '../../components/Searchbar'
-import ListItem from '../../components/ListItem'
 import { getUsers } from "../../services/user"
+import Table from '../../components/Table';
 
 const Users = () => {
     const history = useHistory()
@@ -42,16 +42,11 @@ const Users = () => {
                 setSearchUsers={setSearchUsers}
             />
 
-            <div className="users-list">
-                {loading
-                    ? <div className="loader"></div>
-                    : searchUsers && searchUsers.map((user) => (
-                        <ListItem
-                            key={user.name.first + user.name.last}
-                            user={user}
-                        />
-                    ))
-                }
+            <div className="users-list-container">
+                <Table
+                    users={searchUsers}
+                    loading={loading}
+                />
             </div>
 
             <div className="pagination">
